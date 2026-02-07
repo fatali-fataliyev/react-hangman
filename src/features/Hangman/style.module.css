@@ -1,0 +1,96 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 110%;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.keyboardContainer {
+    text-align: center;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.guessedWordsArea {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.secretWord {
+    margin-bottom: 20px;
+    font-size: 140%;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+
+.choices {
+    font-size: 110%;
+    color: #2d3132;
+    margin-bottom: 20px;
+}
+
+.loseBoxContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #2d3132;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.loseBoxContainer h3 {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.loseBoxContainer span {
+    color: rgb(30, 218, 30);
+}
+
+
+.winBoxContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #30d6ff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.winBoxContainer h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.winBoxContainer span {
+    color: rgb(253, 0, 0);
+}
