@@ -58,7 +58,6 @@ function Hangman() {
 
       return;
     } else {
-      console.log("IS NOT GUESSED!(HINT USAGE)", guessedLetter, isGuessed);
       setChoice((prev) => prev - 1);
     }
   }, [guessedLetters, hints]);

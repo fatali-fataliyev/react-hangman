@@ -6,4 +6,4 @@
 
 ---
 
-Live: ...
+[CLICK TO PLAY 🎮](https://react-hangman.fatali-fataliiyev.workers.dev/)
