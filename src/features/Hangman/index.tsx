@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import style from "./style.module.css";
-import { getImages, getWinGif, getLoseGif } from "../../assets/images.ts";
+import {
+  getHangmanImages,
+  getWinGif,
+  getLoseGif,
+  getHintImg,
+  getRestartImg,
+} from "../../assets/images.ts";
 import { getRandomWord } from "../../assets/word.ts";
 import Button from "../../components/Button.tsx";
 
@@ -12,21 +18,22 @@ function Hangman() {
   const [choice, setChoice] = useState<number>(6);
   const [isWin, setIsWin] = useState<boolean>(false);
   const [isLose, setIsLose] = useState<boolean>(false);
+  const [hints, setHints] = useState<number>(3);
 
   useEffect(() => {
     const newWord = getRandomWord().toLowerCase();
     setWord(newWord);
-    setImages(getImages());
+    setImages(getHangmanImages());
     setChoice(6);
     const encrypted = newWord.split("").map(() => "?");
     setEncryptedWord(encrypted);
-    console.log(newWord);
   }, []);
 
   useEffect(() => {
     if (guessedLetters.length === 0) return;
 
     let guessedLetter: string = guessedLetters[guessedLetters.length - 1];
+
     let isGuessed: number = word.toLowerCase().indexOf(guessedLetter);
 
     if (isGuessed !== -1) {
@@ -51,9 +58,10 @@ function Hangman() {
 
       return;
     } else {
+      console.log("IS NOT GUESSED!(HINT USAGE)", guessedLetter, isGuessed);
       setChoice((prev) => prev - 1);
     }
-  }, [guessedLetters]);
+  }, [guessedLetters, hints]);
 
   useEffect(() => {
     if (choice === 0) {
@@ -66,24 +74,42 @@ function Hangman() {
 
   const isDoubleOrMoreLetter = (word: string, letter: string): number => {
     let totalRepeat: number = 0;
-    let modifiedString: string = "";
-
-    let indexToRemove = word.indexOf(letter);
-
-    if (indexToRemove === -1) {
-      return totalRepeat;
+    for (let letterOfWord of word) {
+      if (letterOfWord === letter) totalRepeat++;
     }
-    totalRepeat++;
-    modifiedString =
-      word.slice(0, indexToRemove) + word.slice(indexToRemove + 1);
-    totalRepeat += isDoubleOrMoreLetter(modifiedString, letter);
     return totalRepeat;
+  };
+
+  const useHint = () => {
+    if (hints <= 0) return;
+
+    const hintIndexes = encryptedWord
+      .map((char, i) => (char === "?" ? i : -1))
+      .filter((i) => i !== -1);
+
+    if (hintIndexes.length === 0) return;
+
+    const priorityIdx = 3 - hints;
+    const revealIdx =
+      encryptedWord[priorityIdx] === "?" && priorityIdx < word.length
+        ? priorityIdx
+        : hintIndexes[hintIndexes.length - 1];
+
+    const revealedLetter = word[revealIdx].toLowerCase();
+
+    const newEncryptedWord = [...encryptedWord];
+    newEncryptedWord[revealIdx] = revealedLetter;
+
+    setEncryptedWord(newEncryptedWord);
+    setGuessedLetter([...guessedLetters, revealedLetter.toLowerCase()]);
+    setHints((prev) => prev - 1);
   };
 
   const restartGame = () => {
     const newWord = getRandomWord();
     setWord(newWord);
     setChoice(6);
+    setHints(3);
     setGuessedLetter([]);
     const encrypted = newWord.split("").map(() => "?");
     setEncryptedWord(encrypted);
@@ -164,7 +190,7 @@ function Hangman() {
     <div className={style.container}>
       <div className={style.imgContainer}>
         <img
-          alt="Game image"
+          alt="Game"
           width={150}
           src={getImg()}
           style={{ borderRadius: 10 }}
@@ -193,7 +219,6 @@ function Hangman() {
         ))}
       </div>
       <hr />
-
       {isWin && (
         <div className={style.winBoxContainer}>
           <div>
@@ -225,7 +250,6 @@ function Hangman() {
           <span>Next game in 3s</span>
         </div>
       )}
-
       {isLose && (
         <div className={style.loseBoxContainer}>
           <div>
@@ -257,6 +281,23 @@ function Hangman() {
           <span>Next game in 3s</span>
         </div>
       )}
+      <div className={style.menuContainer}>
+        <div className={style.menuItem}>
+          <img alt="hint" src={getHintImg()} onClick={useHint} />
+          <p style={style.hintCounter} title="Remaining hint">
+            {hints}
+          </p>
+        </div>
+
+        <div
+          className={style.menuItem}
+          onClick={() => {
+            restartGame();
+          }}
+        >
+          <img alt="restart" src={getRestartImg()} />
+        </div>
+      </div>
     </div>
   );
 }

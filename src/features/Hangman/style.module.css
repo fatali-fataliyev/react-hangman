@@ -94,3 +94,62 @@ body {
 .winBoxContainer span {
     color: rgb(253, 0, 0);
 }
+
+@media screen and (max-width: 630px) {
+    .imgContainer img {
+        width: 120px;
+    }
+
+    .secretWord {
+        font-size: 110%;
+    }
+}
+
+
+.menuContainer {
+    width: 100%;
+    border: 2px solid goldenrod;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.menuItem {
+    position: relative;
+    cursor: pointer;
+    transition: 100ms ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border-bottom: 1px solid slategrey;
+    border-top: 1px solid slategrey;
+
+}
+
+.menuItem:hover {
+    transform: scale(1.1);
+}
+
+.menuItem:active {
+    transform: scale(0.9);
+    opacity: 0.5;
+}
+
+.menuItem img {
+    width: 60px;
+}
+
+.menuItem p {
+    color: rgb(10, 10, 204);
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+    right: 0;
+    bottom: 0;
+}

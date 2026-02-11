@@ -16,3 +16,10 @@
     text-transform: capitalize;
     /* opacity: 0.5; */
 }
+
+
+@media screen and (max-width: 630px) {
+    .letterBtn {
+        padding: 8px;
+    }
+}

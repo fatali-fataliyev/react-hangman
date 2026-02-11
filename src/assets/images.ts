@@ -7,8 +7,10 @@ import img6 from './5.jpg';
 import img7 from './6.jpg';
 import loseGif from "./lose.gif"
 import winGif from "./win.gif"
+import restartImg from "./restart.png";
+import hintImg from "./hint.png"
 
-function getImages(): string[] {
+function getHangmanImages(): string[] {
     return [img1, img2, img3, img4, img5, img6, img7];
 }
 
@@ -20,4 +22,12 @@ function getWinGif(): string {
     return winGif;
 }
 
-export { getImages, getLoseGif, getWinGif };
+function getRestartImg(): string {
+    return restartImg
+}
+function getHintImg(): string {
+    return hintImg;
+}
+
+
+export { getHangmanImages, getLoseGif, getWinGif, getRestartImg, getHintImg };
