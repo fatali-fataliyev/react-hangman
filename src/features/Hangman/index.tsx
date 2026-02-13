@@ -221,7 +221,7 @@ function Hangman() {
       {isWin && (
         <div className={style.winBoxContainer}>
           <div>
-            <h3>YOU WIN 🏆</h3>
+            <h3>YOU WON 🏆</h3>
           </div>
           <div>
             <img
@@ -246,13 +246,13 @@ function Hangman() {
             </p>
           </div>
           <hr />
-          <span>Next game in 3s</span>
+          <span>New game in 3s</span>
         </div>
       )}
       {isLose && (
         <div className={style.loseBoxContainer}>
           <div>
-            <h3>YOU LOSE 😭</h3>
+            <h3>YOU LOST 😭</h3>
           </div>
           <div>
             <img
@@ -277,7 +277,7 @@ function Hangman() {
             </p>
           </div>
           <hr />
-          <span>Next game in 3s</span>
+          <span>New game in 3s</span>
         </div>
       )}
       <div className={style.menuContainer}>
